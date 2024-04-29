@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack Card Counter</title>
+</head>
+<body>
+    <h1>Blackjack Card Counter</h1>
+    <form action="/update_cards" method="post">
+        <label for="selected_cards">Select cards dealt:</label><br>
+        <input type="checkbox" name="selected_cards" value="1"> 1
+        <input type="checkbox" name="selected_cards" value="2"> 2
+        <input type="checkbox" name="selected_cards" value="3"> 3
+        <input type="checkbox" name="selected_cards" value="4"> 4
+        <input type="checkbox" name="selected_cards" value="5"> 5
+        <input type="checkbox" name="selected_cards" value="6"> 6
+        <input type="checkbox" name="selected_cards" value="7"> 7
+        <input type="checkbox" name="selected_cards" value="8"> 8
+        <input type="checkbox" name="selected_cards" value="9"> 9
+        <input type="checkbox" name="selected_cards" value="10"> 10
+        <br><br>
+        <input type="submit" value="Update Cards">
+    </form>
+    <br>
+    <button onclick="calculateNextCard()">Calculate Next Card Outcome</button>
+    <p id="nextCardOutcome"></p>
+    <script>
+        function calculateNextCard() {
+            fetch('/calculate_next_card')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("nextCardOutcome").innerText = "Expected value of the next card: " + data;
+                });
+        }
+    </script>
+</body>
+</html>
